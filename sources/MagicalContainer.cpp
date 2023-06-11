@@ -69,14 +69,18 @@ namespace ariel {
     }
 
     void MagicalContainer::removeElement(int element) {
-        // Check if elem is in mainElements
-        auto it = find(elements.begin(), elements.end(), element);
-        if (it == elements.end()) {
-            throw runtime_error("Invalid argument");
+        bool in_elemnts = false;
+        for(int run : elements){
+            if(run == element){
+                in_elemnts = true;
+            }
+        }
+        if(!in_elemnts){
+            throw std::runtime_error("The Element not in the container!");
         }
 
-        // Erase the element from mainElements
-        elements.erase(it);
+        auto iter = std::lower_bound(elements.begin(), elements.end(), element);
+        elements.erase(iter);
 
         // Rebuilding ascElement
         ascElem.clear();
@@ -133,7 +137,7 @@ namespace ariel {
         ++ascIterator;
         ++index;
         } else {
-            throw std::out_of_range("Out of range");
+            throw std::runtime_error("Run time error");
         }
         return *this;
     }
@@ -168,11 +172,11 @@ namespace ariel {
     }
 
     MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::operator=(const AscendingIterator& other) {
-        if (container.getElements().size() != other.container.getElements().size()) {
+        if (&container != &other.container) {
             throw std::runtime_error("Iterators are pointing at different containers");
         }
 
-        ascIterator = other.container.ascElem.begin() + (other.ascIterator - other.container.ascElem.begin());
+        ascIterator = other.ascIterator;
         index = other.index;
 
         return *this;
@@ -208,7 +212,7 @@ namespace ariel {
         ++crossIterator;
         ++index;
         } else {
-            throw std::out_of_range("Out of range");
+            throw std::runtime_error("Run time error");
         }
         return *this;
     }
@@ -243,11 +247,11 @@ namespace ariel {
     }
 
     MagicalContainer::SideCrossIterator& MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator& other) {
-        if (container.getElements().size() != other.container.getElements().size()) {
+        if (&container != &other.container) {
             throw std::runtime_error("Iterators are pointing at different containers");
         }
 
-        crossIterator = other.container.crossElem.begin() + (other.crossIterator - other.container.crossElem.begin());
+        crossIterator = other.crossIterator;
         index = other.index;
 
         return *this;
@@ -283,7 +287,7 @@ namespace ariel {
         ++primeIterator;
         ++index;
         } else {
-            throw std::out_of_range("Out of range");
+            throw std::runtime_error("Run time error");
         }
         return *this;
     }
@@ -318,11 +322,11 @@ namespace ariel {
     }
 
     MagicalContainer::PrimeIterator& MagicalContainer::PrimeIterator::operator=(const PrimeIterator& other) {
-        if (container.getElements().size() != other.container.getElements().size()) {
+        if (&container != &other.container) {
             throw std::runtime_error("Iterators are pointing at different containers");
         }
 
-        primeIterator = other.container.primeElem.begin() + (other.primeIterator - other.container.primeElem.begin());
+        primeIterator = other.primeIterator;
         index = other.index;
 
         return *this;
