@@ -47,12 +47,12 @@ namespace ariel {
 
             AscendingIterator& operator++();
 
+            AscendingIterator& operator=(const AscendingIterator& other);
+
             bool operator==(const AscendingIterator& other) const;
             bool operator!=(const AscendingIterator& other) const;
             bool operator>(const AscendingIterator& other) const;
             bool operator<(const AscendingIterator& other) const;
-
-            AscendingIterator& operator=(const AscendingIterator& other);
 
             int operator*() const;
 
@@ -77,12 +77,12 @@ namespace ariel {
 
             SideCrossIterator& operator++();
 
+            SideCrossIterator& operator=(const SideCrossIterator& other);
+
             bool operator==(const SideCrossIterator& other) const;
             bool operator!=(const SideCrossIterator& other) const;
             bool operator>(const SideCrossIterator& other) const;
             bool operator<(const SideCrossIterator& other) const;
-
-            SideCrossIterator& operator=(const SideCrossIterator& other);
 
             int operator*() const;
 
@@ -106,13 +106,13 @@ namespace ariel {
             PrimeIterator& operator=(PrimeIterator&& other) = delete;
 
             PrimeIterator& operator++();
+
+            PrimeIterator& operator=(const PrimeIterator& other);
             
             bool operator==(const PrimeIterator& other) const;
             bool operator!=(const PrimeIterator& other) const;
             bool operator>(const PrimeIterator& other) const;
             bool operator<(const PrimeIterator& other) const;
-
-            PrimeIterator& operator=(const PrimeIterator& other);
             
             int operator*() const;
 
